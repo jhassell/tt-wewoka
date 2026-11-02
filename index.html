@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thévenin Equivalents — a short course</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <p class="kicker">First-year electrical engineering</p>
+  <h1>Thévenin Equivalents</h1>
+  <p class="lede">Three short lessons on the most useful simplification in circuit analysis: replacing a whole network with one voltage source and one resistor.</p>
+</header>
+<nav class="lessons" aria-label="Lessons">
+  <a href="index.html" aria-current="page">Overview</a>
+  <a href="lesson1.html">1 · The big idea</a>
+  <a href="lesson2.html">2 · Finding V<sub>th</sub> and R<sub>th</sub></a>
+  <a href="lesson3.html">3 · Loads and power</a>
+  <a href="quiz.html">Quiz</a>
+  <a href="sources.html">Sources</a>
+</nav>
+<main>
+  <p>When you connect anything to a circuit — a sensor, a motor, a speaker, the next stage of an amplifier — that device only ever sees <strong>two terminals</strong>. However complicated the network behind those terminals is, a linear one leaves exactly one signature there. Thévenin's theorem says that signature can always be reproduced by two components: a voltage source and a resistor.<sup class="src"><a href="sources.html#s1">[1]</a></sup></p>
+
+  <ol class="lessons">
+    <li>
+      <span class="num">LESSON 1</span><br>
+      <a href="lesson1.html">The big idea: a circuit has a view from its terminals</a>
+      <p>What a Thévenin equivalent is, why it is allowed, and where the idea stops working.</p>
+    </li>
+    <li>
+      <span class="num">LESSON 2</span><br>
+      <a href="lesson2.html">Finding V<sub>th</sub> and R<sub>th</sub></a>
+      <p>The open-circuit voltage, the two ways to get the equivalent resistance, and worked examples.</p>
+    </li>
+    <li>
+      <span class="num">LESSON 3</span><br>
+      <a href="lesson3.html">Using the equivalent: loads and maximum power</a>
+      <p>Attach a load, read off the current and voltage, and find the load that takes the most power.</p>
+    </li>
+  </ol>
+
+  <p>After the three lessons, <a href="quiz.html">take the five-question quiz</a>. Every factual claim on this site carries a numbered marker, and all of them point to the <a href="sources.html">public sources</a>.</p>
+
+  <h2>What you should already know</h2>
+  <ul>
+    <li>Ohm's law, <code>V = I R</code>.</li>
+    <li>Resistors in series add; resistors in parallel: <code>1/R = 1/R₁ + 1/R₂</code>.</li>
+    <li>Voltage dividers and current dividers.</li>
+    <li>Kirchhoff's voltage and current laws (KVL and KCL).</li>
+  </ul>
+
+  <div class="socratic" data-question="overview-terminal-view">
+    <p>Why can a single voltage source and a single resistor stand in for an entire network, when a load can only ever see two terminals?</p>
+  </div>
+
+  <p class="note">Work through the lessons in order. Each one ends with a “Check yourself” block you can open once you have tried the question.</p>
+</main>
+<footer class="site">
+  Course notes for first-year electrical engineering students. Worked numbers use the standard symbols V<sub>th</sub> (Thévenin voltage) and R<sub>th</sub> (Thévenin resistance).
+</footer>
+<script src="socratic.js" defer></script>
+</body>
+</html>

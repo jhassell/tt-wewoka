@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1 — A circuit has a view from its terminals</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <p class="kicker">Lesson 1 of 3</p>
+  <h1>A circuit has a view from its terminals</h1>
+</header>
+<nav class="lessons" aria-label="Lessons">
+  <a href="index.html">Overview</a>
+  <a href="lesson1.html" aria-current="page">1 · The big idea</a>
+  <a href="lesson2.html">2 · Finding V<sub>th</sub> and R<sub>th</sub></a>
+  <a href="lesson3.html">3 · Loads and power</a>
+  <a href="quiz.html">Quiz</a>
+  <a href="sources.html">Sources</a>
+</nav>
+<main>
+  <h2>Two terminals are all a load can see</h2>
+  <p>Every circuit you will build has a part that does the work — the source and its network — and a part that uses it — the <strong>load</strong> (a resistor, a sensor, a meter, the next stage). The two are joined at a pair of terminals. From the load's side, everything to the left of those terminals is a black box. It does not matter which resistor is where inside: the box presents a voltage across the terminals and lets a current flow out of them.</p>
+  <p>Thévenin's theorem is the statement that this black box can be replaced, for every purpose that only involves the terminals, by the simplest possible circuit:<sup class="src"><a href="sources.html#s1">[1]</a></sup></p>
+  <span class="eq">V<sub>th</sub> in series with R<sub>th</sub></span>
+  <p>where <strong>V<sub>th</sub></strong> is the open-circuit voltage the box shows when nothing is connected, and <strong>R<sub>th</sub></strong> is the resistance as seen from the terminals once every independent source inside is set to zero.<sup class="src"><a href="sources.html#s1">[1]</a></sup></p>
+
+  <h2>Why this is allowed</h2>
+  <p>A linear network obeys <em>superposition</em> and Ohm's law everywhere.<sup class="src"><a href="sources.html#s3">[3]</a></sup><sup class="src"><a href="sources.html#s4">[4]</a></sup> Its terminal behaviour is therefore a straight line: the terminal voltage falls as the load draws more current,</p>
+  <span class="eq">V = V<sub>th</sub> − I · R<sub>th</sub></span>
+  <p>A straight line is fixed by two numbers. They are exactly V<sub>th</sub> (the voltage at zero current) and R<sub>th</sub> (the drop per unit of current). Any two-component circuit that matches those two numbers behaves identically at the terminals, so we may as well use it.</p>
+
+  <h2>The equivalent is defined at the terminals</h2>
+  <p>Read the phrase carefully: the equivalent is valid <em>as seen from the terminals you chose</em>. Move the terminals, and you get a different equivalent.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 680 260" role="img" aria-label="A four-resistor network boxed with terminals a and b, alongside its Thevenin equivalent of a voltage source and one resistor.">
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <!-- source -->
+        <circle cx="70" cy="150" r="20"/>
+        <line x1="70" y1="130" x2="70" y2="120"/>
+        <line x1="70" y1="170" x2="70" y2="180"/>
+        <line x1="66" y1="143" x2="74" y2="143"/>
+        <line x1="66" y1="157" x2="74" y2="157"/>
+        <!-- top rail -->
+        <line x1="70" y1="120" x2="150" y2="120"/>
+        <line x1="150" y1="120" x2="150" y2="60"/>
+        <line x1="150" y1="60" x2="250" y2="60"/>
+        <!-- R1 vertical -->
+        <rect x="140" y="80" width="20" height="40"/>
+        <!-- bottom rail -->
+        <line x1="70" y1="180" x2="300" y2="180"/>
+        <line x1="300" y1="180" x2="300" y2="60"/>
+        <!-- terminals -->
+        <line x1="250" y1="60" x2="330" y2="60"/>
+        <line x1="300" y1="150" x2="330" y2="150"/>
+        <circle cx="255" cy="60" r="3" fill="currentColor"/>
+        <circle cx="305" cy="150" r="3" fill="currentColor"/>
+        <!-- box around left network -->
+        <rect x="105" y="40" width="215" height="160" rx="10" stroke-dasharray="6 6" stroke-opacity="0.7"/>
+      </g>
+      <text x="45" y="210" font-size="15" fill="currentColor">source</text>
+      <text x="150" y="115" font-size="15" fill="currentColor">R₁</text>
+      <text x="310" y="54" font-size="15" fill="currentColor">a</text>
+      <text x="310" y="146" font-size="15" fill="currentColor">b</text>
+      <text x="150" y="30" font-size="15" fill="currentColor">network of linear resistors</text>
+      <text x="360" y="105" font-size="15" fill="currentColor">≡</text>
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="430" cy="70" r="20"/>
+        <line x1="430" y1="50" x2="430" y2="40"/>
+        <line x1="430" y1="90" x2="430" y2="120"/>
+        <rect x="420" y="120" width="20" height="44"/>
+        <line x1="430" y1="164" x2="430" y2="190"/>
+        <line x1="430" y1="190" x2="430" y2="200"/>
+        <line x1="430" y1="63" x2="438" y2="63"/>
+        <line x1="430" y1="77" x2="438" y2="77"/>
+        <line x1="540" y1="40" x2="540" y2="200"/>
+      </g>
+      <text x="395" y="60" font-size="15" fill="currentColor">V<tspan baseline-shift="sub" font-size="11">th</tspan></text>
+      <text x="448" y="148" font-size="15" fill="currentColor">R<tspan baseline-shift="sub" font-size="11">th</tspan></text>
+      <text x="552" y="54" font-size="15" fill="currentColor">a</text>
+      <text x="552" y="146" font-size="15" fill="currentColor">b</text>
+    </svg>
+    <figcaption>The box on the left may contain any number of linear resistors and independent sources. As seen from a and b it is indistinguishable from one source V<sub>th</sub> and one resistor R<sub>th</sub>.</figcaption>
+  </figure>
+
+  <h2>Where the idea stops working</h2>
+  <div class="box">
+    <p><strong>The theorem needs a linear circuit.</strong> Resistors, independent sources, and the ideal op-amp are fine. Diodes, transistors driven hard, and anything else with a curved V–I characteristic are not: their terminal curve is not a straight line, so two numbers cannot capture it.<sup class="src"><a href="sources.html#s1">[1]</a></sup><sup class="src"><a href="sources.html#s3">[3]</a></sup></p>
+  </div>
+  <p>Three more cautions, all of which cost marks:</p>
+  <ul>
+    <li><strong>Independence is required for the shortcut.</strong> When you set sources to zero to find R<sub>th</sub>, you may only zero <em>independent</em> sources. A dependent (controlled) source stays, and you must find R<sub>th</sub> another way — Lesson 2 shows how.<sup class="src"><a href="sources.html#s5">[5]</a></sup></li>
+    <li><strong>Nothing inside is preserved.</strong> The equivalent tells you nothing about the voltage across an internal resistor or the power it dissipates. Use it only for what happens <em>at</em> the terminals.</li>
+    <li><strong>Not the same as the source.</strong> V<sub>th</sub> is rarely the value printed on the source; R<sub>th</sub> is rarely one of the resistors you started with. They are the <em>combined</em> effect.</li>
+  </ul>
+
+  <div class="socratic" data-question="l1-terminals">
+    <p>A ten-resistor network and a one-source-one-resistor circuit both show 6 V open-circuit and 2 Ω when you look into the same two terminals. In what sense are they the same circuit, and in what sense are they not?</p>
+  </div>
+
+  <h2>Check yourself</h2>
+  <details>
+    <summary>A 12 V source feeds a 4 Ω resistor, and you have chosen your terminals across that resistor. What is V<sub>th</sub>?</summary>
+    <p>The open-circuit voltage is the voltage across the 4 Ω when nothing is attached to the terminals. No current flows through the external path, but the source still drives its own loop, so the resistor carries 12 V ÷ 4 Ω = 3 A, and the terminal voltage is 3 A × 4 Ω = <strong>12 V</strong>. Here V<sub>th</sub> happens to equal the source voltage, which is why “the source is the Thévenin voltage” is a common but unreliable shortcut.</p>
+  </details>
+  <details>
+    <summary>Two circuits have the same V<sub>th</sub> = 6 V and R<sub>th</sub> = 2 Ω as seen from their terminals, but one hides a 100 Ω resistor inside. Are they equivalent?</summary>
+    <p>Yes — as seen from the terminals. Any load connected there cannot tell them apart. The difference shows up only in quantities <em>inside</em> the box, such as the current through the hidden resistor, which the equivalent cannot reproduce. Equivalence is a statement about the terminals.</p>
+  </details>
+
+  <p class="note">Next: <a href="lesson2.html">Lesson 2 — Finding V<sub>th</sub> and R<sub>th</sub></a>.</p>
+</main>
+<footer class="site">
+  <p><a href="index.html">Course overview</a> · <a href="lesson2.html">Next lesson</a></p>
+</footer>
+<script src="socratic.js" defer></script>
+</body>
+</html>

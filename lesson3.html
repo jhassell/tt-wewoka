@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3 — Loads and maximum power</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <p class="kicker">Lesson 3 of 3</p>
+  <h1>Using the equivalent: loads and maximum power</h1>
+</header>
+<nav class="lessons" aria-label="Lessons">
+  <a href="index.html">Overview</a>
+  <a href="lesson1.html">1 · The big idea</a>
+  <a href="lesson2.html">2 · Finding V<sub>th</sub> and R<sub>th</sub></a>
+  <a href="lesson3.html" aria-current="page">3 · Loads and power</a>
+</nav>
+<main>
+  <p>Once you have V<sub>th</sub> and R<sub>th</sub>, attaching a load R<sub>L</sub> is a two-resistor problem. The reason to build the equivalent is that you only do the hard analysis once, then answer every “what if the load changes?” question in one line.</p>
+
+  <h2>The loaded equivalent</h2>
+  <p>V<sub>th</sub> and R<sub>th</sub> are in series, and the load closes the loop. Everything follows from Ohm's law:</p>
+  <span class="eq">I<sub>L</sub> = V<sub>th</sub> / (R<sub>th</sub> + R<sub>L</sub>)</span>
+  <span class="eq">V<sub>L</sub> = I<sub>L</sub> · R<sub>L</sub> = V<sub>th</sub> · R<sub>L</sub> / (R<sub>th</sub> + R<sub>L</sub>)</span>
+  <span class="eq">P<sub>L</sub> = I<sub>L</sub>² · R<sub>L</sub> = V<sub>th</sub>² · R<sub>L</sub> / (R<sub>th</sub> + R<sub>L</sub>)²</span>
+  <p>These are just the voltage-divider and power formulas, now with the whole network collapsed into two symbols. Attaching a load never changes V<sub>th</sub> or R<sub>th</sub> — that is the point of building the equivalent.</p>
+
+  <h2>Using Example A</h2>
+  <p>Recall from Lesson 2 that the divider gave V<sub>th</sub> = 4.8 V and R<sub>th</sub> = 2.4 Ω. Fill in the formulas for a few loads:</p>
+  <table>
+    <thead>
+      <tr><th>R<sub>L</sub> (Ω)</th><th>I<sub>L</sub> (A)</th><th>V<sub>L</sub> (V)</th><th>P<sub>L</sub> (W)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0</td><td>2.0</td><td>0</td><td>0</td></tr>
+      <tr><td>1.2</td><td>1.33</td><td>1.60</td><td>2.13</td></tr>
+      <tr><td>2.4</td><td>1.0</td><td>2.4</td><td>2.40</td></tr>
+      <tr><td>4.8</td><td>0.667</td><td>3.2</td><td>2.13</td></tr>
+      <tr><td>∞ (open)</td><td>0</td><td>4.8</td><td>0</td></tr>
+    </tbody>
+  </table>
+  <p>Two things to notice. The open-circuit case (R<sub>L</sub> → ∞) shows V<sub>L</sub> = V<sub>th</sub>, which is where V<sub>th</sub> came from. And the power peaks in the middle of the table, not at either end.</p>
+
+  <h2>Maximum power transfer</h2>
+  <p>Treat P<sub>L</sub> as a function of R<sub>L</sub> and find its maximum. Setting the derivative to zero gives a very clean result:</p>
+  <div class="box">
+    <p><strong>Maximum power is delivered to the load when R<sub>L</sub> = R<sub>th</sub>.</strong> At that match,</p>
+    <span class="eq">P<sub>max</sub> = V<sub>th</sub>² / (4 R<sub>th</sub>)</span>
+    <p>and the load voltage is exactly half of V<sub>th</sub>.</p>
+  </div>
+  <p>For Example A: R<sub>L</sub> = 2.4 Ω gives P<sub>max</sub> = (4.8)² / (4 × 2.4) = 23.04 / 9.6 = <strong>2.4 W</strong>, matching the middle row. Half the source power goes to the load and half is dissipated in R<sub>th</sub>.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 560 230" role="img" aria-label="A curve of load power against load resistance, peaking where the load resistance equals the Thevenin resistance.">
+      <!-- axes -->
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="70" y1="30" x2="70" y2="190"/>
+        <line x1="70" y1="190" x2="520" y2="190"/>
+      </g>
+      <!-- curve: P ~ R/(2.4+R)^2 normalised, peak at R=2.4 -->
+      <path d="M70,190 C110,70 150,58 200,60 C280,64 380,120 500,175"
+            fill="none" stroke="currentColor" stroke-width="3"/>
+      <!-- peak guide -->
+      <line x1="200" y1="60" x2="200" y2="190" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 5" stroke-opacity="0.7"/>
+      <circle cx="200" cy="60" r="5" fill="currentColor"/>
+      <text x="130" y="45" font-size="13" fill="currentColor">P<tspan baseline-shift="sub" font-size="10">max</tspan></text>
+      <text x="212" y="55" font-size="13" fill="currentColor">R<tspan baseline-shift="sub" font-size="10">L</tspan> = R<tspan baseline-shift="sub" font-size="10">th</tspan></text>
+      <text x="24" y="110" font-size="13" fill="currentColor" transform="rotate(-90 30 110)">P<tspan baseline-shift="sub" font-size="10">L</tspan></text>
+      <text x="480" y="215" font-size="13" fill="currentColor">R<tspan baseline-shift="sub" font-size="10">L</tspan></text>
+      <text x="60" y="212" font-size="12" fill="currentColor">0</text>
+    </svg>
+    <figcaption>Load power rises to a peak at R<sub>L</sub> = R<sub>th</sub> and falls on both sides. Zero load shorts the source; infinite load draws no current.</figcaption>
+  </figure>
+
+  <h2>Maximum power is not maximum efficiency</h2>
+  <p>Be careful with the phrase. At the match, the load receives half the power the source provides — the other half is lost in R<sub>th</sub>, so the efficiency is only 50%. This is the right design goal when the source is weak and you must extract every microwatt (an antenna, a sensor, a radio receiver). It is the <em>wrong</em> goal for a power system, where wasting half the generated power would be unacceptable; there you want R<sub>L</sub> large compared with R<sub>th</sub> so that nearly all the power reaches the load.</p>
+
+  <h2>Check yourself</h2>
+  <details>
+    <summary>For Example A, what load resistance wastes the most power, and what is the efficiency then?</summary>
+    <p>Maximum <em>waste</em> in R<sub>th</sub> happens at the same match, R<sub>L</sub> = R<sub>th</sub> = 2.4 Ω. Both resistors then carry 1 A and dissipate 2.4 W each, so the source delivers 4.8 W total and the efficiency is 50% — the worst case for a power supply.</p>
+  </details>
+  <details>
+    <summary>You attach a load much larger than R<sub>th</sub>. What happens to the terminal voltage and the power?</summary>
+    <p>The terminal voltage rises toward V<sub>th</sub> (little drop across R<sub>th</sub>), but the current falls, so the power also falls — the load is not matched, so it extracts less than P<sub>max</sub>. Efficiency, however, is high: nearly all the source power reaches the load. Large R<sub>L</sub> is good for efficiency, poor for power transfer.</p>
+  </details>
+
+  <p class="note">That is the course. <a href="index.html">Back to the overview</a>, or revisit <a href="lesson2.html">Lesson 2</a> if a step felt shaky.</p>
+</main>
+<footer class="site">
+  <p><a href="lesson2.html">Previous</a> · <a href="index.html">Course overview</a></p>
+</footer>
+</body>
+</html>

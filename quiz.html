@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz — Thévenin Equivalents</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <p class="kicker">Check your work</p>
+  <h1>Five-question quiz</h1>
+  <p class="lede">Try each question on paper first, then open the answer. Every answer states which public source it rests on.</p>
+</header>
+<nav class="lessons" aria-label="Lessons">
+  <a href="index.html">Overview</a>
+  <a href="lesson1.html">1 · The big idea</a>
+  <a href="lesson2.html">2 · Finding V<sub>th</sub> and R<sub>th</sub></a>
+  <a href="lesson3.html">3 · Loads and power</a>
+  <a href="quiz.html" aria-current="page">Quiz</a>
+  <a href="sources.html">Sources</a>
+</nav>
+<main class="quiz">
+  <div class="q">
+    <h3>1. In one or two sentences, what is a Thévenin equivalent?</h3>
+    <details>
+      <summary>Show answer</summary>
+      <p>It is the replacement of any linear network, as seen from a chosen pair of terminals, by a single voltage source V<sub>th</sub> in series with a single resistor R<sub>th</sub>. The two components reproduce the network's terminal behaviour exactly for every load. <sup class="src"><a href="sources.html#s1">[1]</a></sup></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <h3>2. For a network with V<sub>th</sub> = 10 V and R<sub>th</sub> = 5 Ω, predict the terminal voltage and the current when a 5 Ω load is attached.</h3>
+    <details>
+      <summary>Show answer</summary>
+      <p>The load and R<sub>th</sub> are equal, so they split the source voltage evenly:</p>
+      <span class="eq">I<sub>L</sub> = 10 V / (5 Ω + 5 Ω) = 1 A,   V<sub>L</sub> = 1 A × 5 Ω = 5 V</span>
+      <p>Half of V<sub>th</sub> appears across the load. This is the matched case of <a href="lesson3.html">Lesson 3</a>, so the load is also taking maximum power. <sup class="src"><a href="sources.html#s1">[1]</a></sup><sup class="src"><a href="sources.html#s2">[2]</a></sup></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <h3>3. Why can you not find R<sub>th</sub> by replacing the sources with shorts and opens when a dependent source is present?</h3>
+    <details>
+      <summary>Show answer</summary>
+      <p>A dependent source has no fixed value of its own; its value is set by a voltage or current elsewhere in the network. Zeroing it would change the very quantities that control it, so the circuit you analyse would not be the one you were given. Only <em>independent</em> sources may be zeroed; with a dependent source you must use the short-circuit method or a test source instead. <sup class="src"><a href="sources.html#s1">[1]</a></sup><sup class="src"><a href="sources.html#s5">[5]</a></sup></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <h3>4. A source has V<sub>th</sub> = 2 V and R<sub>th</sub> = 50 Ω, and it is connected to a 50 Ω load. Is this the maximum-power design? What efficiency results, and when would you deliberately choose a much larger load instead?</h3>
+    <details>
+      <summary>Show answer</summary>
+      <p>Yes — the load equals R<sub>th</sub>, so it receives maximum power, P<sub>max</sub> = V<sub>th</sub>²/(4R<sub>th</sub>) = (2)²/(4 × 50) = 20 mW. The efficiency, however, is only 50%: the other half of the source power is lost in R<sub>th</sub>. You accept that when the signal is weak and you must capture every microwatt (an antenna or sensor). For a power system you would choose R<sub>L</sub> ≫ R<sub>th</sub>, which lowers the delivered power but raises the efficiency. <sup class="src"><a href="sources.html#s2">[2]</a></sup></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <h3>5. Find R<sub>th</sub> at a–b for this network: a 12 V source feeds a 3 Ω resistor, then a 6 Ω resistor to ground; the terminals a–b are across the 6 Ω resistor.</h3>
+    <details>
+      <summary>Show answer</summary>
+      <p>No dependent sources, so zero the 12 V source (a short). Looking into a–b, the 3 Ω and 6 Ω resistors are now in parallel:</p>
+      <span class="eq">R<sub>th</sub> = 3 Ω ∥ 6 Ω = (3 × 6)/(3 + 6) = 2 Ω</span>
+      <p>For reference, the open-circuit voltage is V<sub>th</sub> = 12 V × 6/(3 + 6) = 8 V. <sup class="src"><a href="sources.html#s1">[1]</a></sup><sup class="src"><a href="sources.html#s6">[6]</a></sup></p>
+    </details>
+  </div>
+
+  <div class="socratic" data-question="quiz-tool">
+    <p>If the load on a network is going to change many times, which single idea from these lessons would you use, and why does it save work?</p>
+  </div>
+
+  <h2>Sources</h2>
+  <p class="note">Answers rest on <a href="sources.html#s1">[1] Thévenin's theorem</a>, <a href="sources.html#s2">[2] Maximum power transfer</a>, <a href="sources.html#s5">[5] Dependent source</a>, and <a href="sources.html#s6">[6] Ohm's law</a>.</p>
+</main>
+<footer class="site">
+  <p><a href="index.html">Course overview</a> · <a href="sources.html">All sources</a></p>
+</footer>
+<script src="socratic.js" defer></script>
+</body>
+</html>

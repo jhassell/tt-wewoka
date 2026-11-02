@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2 — Finding V_th and R_th</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <p class="kicker">Lesson 2 of 3</p>
+  <h1>Finding V<sub>th</sub> and R<sub>th</sub></h1>
+</header>
+<nav class="lessons" aria-label="Lessons">
+  <a href="index.html">Overview</a>
+  <a href="lesson1.html">1 · The big idea</a>
+  <a href="lesson2.html" aria-current="page">2 · Finding V<sub>th</sub> and R<sub>th</sub></a>
+  <a href="lesson3.html">3 · Loads and power</a>
+  <a href="quiz.html">Quiz</a>
+  <a href="sources.html">Sources</a>
+</nav>
+<main>
+  <p>Two numbers fully describe the black box. Here is how to get each one.</p>
+
+  <h2>Step 0: mark the terminals</h2>
+  <p>Circle the two terminals a and b you care about, and redraw everything else as the box. If the problem says “find the Thévenin equivalent at a–b”, a and b are fixed. If you choose them, say so, because the answer depends on the choice.</p>
+
+  <h2>V<sub>th</sub>: the open-circuit voltage</h2>
+  <p>Disconnect the load. Solve the network with nothing between a and b, and find the voltage that appears across a and b. That is V<sub>th</sub>. Use whatever you are comfortable with — KVL and KCL, nodal analysis, mesh analysis, or a voltage divider when the network is simple.</p>
+
+  <h2>R<sub>th</sub>: three ways</h2>
+  <table>
+    <thead>
+      <tr><th>Method</th><th>How</th><th>Use when</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Zero the sources</strong></td>
+        <td>Set each independent voltage source to a short and each independent current source to an open, then combine the remaining resistors.</td>
+        <td>Only independent sources. Fastest when it applies.</td>
+      </tr>
+      <tr>
+        <td><strong>2. Short-circuit current</strong></td>
+        <td>Short a to b, find the current I<sub>sc</sub> through the short, then R<sub>th</sub> = V<sub>th</sub> / I<sub>sc</sub>.</td>
+        <td>Always works, including with dependent sources.</td>
+      </tr>
+      <tr>
+        <td><strong>3. Test source</strong></td>
+        <td>Turn off the independent sources, attach a 1 A test source at a–b, and read the voltage across it: that voltage is R<sub>th</sub> in ohms.</td>
+        <td>Always works. Attach 1 V and read the current instead if you prefer.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="box">
+    <p><strong>Do not use Method 1 when a dependent source is present.</strong> A dependent source is not a source you can “turn off”; it is part of the circuit's behaviour. Zero only the independent ones, and get R<sub>th</sub> by Method 2 or 3.</p>
+  </div>
+
+  <h2>Worked example A — a loaded divider</h2>
+  <p>Find the Thévenin equivalent at the terminals across R₂, with V<sub>s</sub> = 12 V, R₁ = 6 Ω, R₂ = 4 Ω.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 320 200" role="img" aria-label="A 12 volt source in series with a 6 ohm resistor and a 4 ohm resistor to ground, with terminals a and b across the 4 ohm resistor.">
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="60" cy="110" r="20"/>
+        <line x1="56" y1="103" x2="64" y2="103"/>
+        <line x1="56" y1="117" x2="64" y2="117"/>
+        <line x1="60" y1="90" x2="60" y2="55"/>
+        <line x1="60" y1="55" x2="160" y2="55"/>
+        <rect x="150" y="45" width="20" height="20" fill="none"/>
+        <line x1="170" y1="55" x2="240" y2="55"/>
+        <line x1="240" y1="55" x2="240" y2="90"/>
+        <rect x="230" y="90" width="20" height="40"/>
+        <line x1="240" y1="130" x2="240" y2="160"/>
+        <line x1="60" y1="130" x2="60" y2="160"/>
+        <line x1="60" y1="160" x2="240" y2="160"/>
+        <circle cx="245" cy="55" r="3" fill="currentColor"/>
+        <circle cx="245" cy="130" r="3" fill="currentColor"/>
+      </g>
+      <text x="30" y="115" font-size="14" fill="currentColor">12 V</text>
+      <text x="140" y="38" font-size="14" fill="currentColor">R₁ = 6 Ω</text>
+      <text x="258" y="116" font-size="14" fill="currentColor">R₂ = 4 Ω</text>
+      <text x="255" y="50" font-size="14" fill="currentColor">a</text>
+      <text x="255" y="135" font-size="14" fill="currentColor">b</text>
+    </svg>
+    <figcaption>Example A: terminals a–b are across R₂.</figcaption>
+  </figure>
+  <p><strong>V<sub>th</sub>.</strong> With a–b open, R₁ and R₂ form a divider and the same current flows through both:</p>
+  <span class="eq">V<sub>th</sub> = V<sub>s</sub> · R₂ / (R₁ + R₂) = 12 V · 4 Ω / (6 Ω + 4 Ω) = 4.8 V</span>
+  <p><strong>R<sub>th</sub>.</strong> No dependent sources, so zero V<sub>s</sub> (short it) and look into a–b. R₁ and R₂ now sit in parallel:</p>
+  <span class="eq">R<sub>th</sub> = R₁ · R₂ / (R₁ + R₂) = 6 Ω · 4 Ω / (6 Ω + 4 Ω) = 2.4 Ω</span>
+  <p>So the whole divider is equivalent, at a–b, to a 4.8 V source in series with 2.4 Ω.</p>
+
+  <h2>Worked example B — a dependent source</h2>
+  <p>Now a network where Method 1 is not allowed. Take V<sub>s</sub> = 12 V, R₁ = 6 Ω, R₂ = 4 Ω, and add a dependent current source from a to b whose value is <code>0.5 · I₁</code>, where I₁ is the current through R₁ flowing into node a. Find the Thévenin equivalent at a–b.</p>
+  <p><strong>V<sub>th</sub>.</strong> With a–b open, let V<sub>a</sub> be the voltage at a. KCL at a says the current arriving through R₁ equals the current leaving through R₂ plus the dependent source:</p>
+  <span class="eq">I₁ = V<sub>a</sub> / R₂ + 0.5 · I₁   ⟹   I₁ = 2 V<sub>a</sub> / R₂</span>
+  <p>And KVL around the left loop gives V<sub>a</sub> = 12 V − 6 Ω · I₁. Substituting:</p>
+  <span class="eq">V<sub>a</sub> = 12 V − 6 Ω · (2 V<sub>a</sub> / 4 Ω) = 12 V − 3 V<sub>a</sub>   ⟹   V<sub>a</sub> = 3 V</span>
+  <p><strong>R<sub>th</sub>.</strong> Zero the independent source only — the dependent source stays — and use the short-circuit method. Short a to b, so V<sub>a</sub> = 0. R₁ now sees the full 12 V:</p>
+  <span class="eq">I₁ = 12 V / 6 Ω = 2 A,   I<sub>sc</sub> = I₁ − 0.5 · I₁ = 1 A</span>
+  <span class="eq">R<sub>th</sub> = V<sub>th</sub> / I<sub>sc</sub> = 3 V / 1 A = 3 Ω</span>
+  <p>Both answers are clean, which is a good sign the algebra is right. Note that Method 1 would give R₁ ∥ R₂ = 2.4 Ω here, and that would be wrong: the dependent source changes the resistance the terminals see.</p>
+
+  <h2>Check yourself</h2>
+  <details>
+    <summary>In Example A, what load voltage do you predict for a 2.4 Ω load?</summary>
+    <p>The load equals R<sub>th</sub>, so it splits the source evenly: V<sub>L</sub> = V<sub>th</sub> · R<sub>L</sub> / (R<sub>th</sub> + R<sub>L</sub>) = 4.8 V · 2.4 / (2.4 + 2.4) = <strong>2.4 V</strong>. The current is 2.4 V ÷ 2.4 Ω = 1 A. Lesson 3 shows why that particular load is special.</p>
+  </details>
+  <details>
+    <summary>Why can you not “turn off” a dependent source to find R<sub>th</sub>?</summary>
+    <p>Because it is not an independent input — its value is set by a voltage or current elsewhere in the circuit. Setting it to zero would change the very currents that control it, so the circuit you analyse would no longer be the one you were given. Zero the independent sources, keep the dependent one, and use the short-circuit or test-source method.</p>
+  </details>
+
+  <p class="note">Next: <a href="lesson3.html">Lesson 3 — Using the equivalent: loads and maximum power</a>.</p>
+</main>
+<footer class="site">
+  <p><a href="lesson1.html">Previous</a> · <a href="index.html">Course overview</a> · <a href="lesson3.html">Next lesson</a></p>
+</footer>
+</body>
+</html>
